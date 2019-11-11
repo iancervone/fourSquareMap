@@ -60,6 +60,7 @@ class SearchVC: UIViewController {
     venueSearchConstraints()
     menuButtonConstraints()
     locationSearchConstraints()
+    mapConstraints()
   }
   
   private func venueSearchConstraints() {
@@ -90,6 +91,16 @@ class SearchVC: UIViewController {
       locationSearch.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       locationSearch.heightAnchor.constraint(equalToConstant: 30)
     
+    ])
+  }
+  
+  private func mapConstraints() {
+    map.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      map.topAnchor.constraint(equalTo: locationSearch.bottomAnchor),
+      map.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      map .trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      map.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
   }
   
