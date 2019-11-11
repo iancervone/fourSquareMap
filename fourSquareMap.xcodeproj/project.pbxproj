@@ -15,6 +15,7 @@
 		3C13E4262370D53500301711 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C13E4252370D53500301711 /* Assets.xcassets */; };
 		3C13E4292370D53500301711 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C13E4272370D53500301711 /* LaunchScreen.storyboard */; };
 		3C13E4342370D53500301711 /* fourSquareMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13E4332370D53500301711 /* fourSquareMapTests.swift */; };
+		3C1EA1882378E94E003F1DCF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EA1872378E94E003F1DCF /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		3C13E42F2370D53500301711 /* fourSquareMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fourSquareMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C13E4332370D53500301711 /* fourSquareMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fourSquareMapTests.swift; sourceTree = "<group>"; };
 		3C13E4352370D53500301711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C1EA1872378E94E003F1DCF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				3C13E4202370D53400301711 /* SearchVC.swift */,
+				3C1EA1872378E94E003F1DCF /* ListViewController.swift */,
 				3C096A6A2378D47800E5368F /* CollectionsVC.swift */,
 			);
 			path = Controllers;
@@ -236,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C096A6B2378D47800E5368F /* CollectionsVC.swift in Sources */,
+				3C1EA1882378E94E003F1DCF /* ListViewController.swift in Sources */,
 				3C13E4212370D53400301711 /* SearchVC.swift in Sources */,
 				3C13E41D2370D53400301711 /* AppDelegate.swift in Sources */,
 				3C13E41F2370D53400301711 /* SceneDelegate.swift in Sources */,
