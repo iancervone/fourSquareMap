@@ -17,6 +17,8 @@
 		3C13E4342370D53500301711 /* fourSquareMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13E4332370D53500301711 /* fourSquareMapTests.swift */; };
 		3C1EA1882378E94E003F1DCF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EA1872378E94E003F1DCF /* ListViewController.swift */; };
 		3CB69E852381C2FD0007FB4E /* ListTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E842381C2FD0007FB4E /* ListTVCell.swift */; };
+		3CB69E872381D33C0007FB4E /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E862381D33C0007FB4E /* LocationModel.swift */; };
+		3CB69E892381D3AC0007FB4E /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E882381D3AC0007FB4E /* AppError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		3C13E4352370D53500301711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C1EA1872378E94E003F1DCF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3CB69E842381C2FD0007FB4E /* ListTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTVCell.swift; sourceTree = "<group>"; };
+		3CB69E862381D33C0007FB4E /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		3CB69E882381D3AC0007FB4E /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 		3C13E43E2370D5CE00301711 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3CB69E862381D33C0007FB4E /* LocationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 		3C13E4412370D60A00301711 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3CB69E882381D3AC0007FB4E /* AppError.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -245,7 +251,9 @@
 				3C1EA1882378E94E003F1DCF /* ListViewController.swift in Sources */,
 				3C13E4212370D53400301711 /* SearchVC.swift in Sources */,
 				3C13E41D2370D53400301711 /* AppDelegate.swift in Sources */,
+				3CB69E892381D3AC0007FB4E /* AppError.swift in Sources */,
 				3C13E41F2370D53400301711 /* SceneDelegate.swift in Sources */,
+				3CB69E872381D33C0007FB4E /* LocationModel.swift in Sources */,
 				3CB69E852381C2FD0007FB4E /* ListTVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
