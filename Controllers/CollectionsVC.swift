@@ -9,22 +9,57 @@
 import UIKit
 
 class CollectionsVC: UIViewController {
+  
+  lazy var addButotn: UIButton = {
+    let button = UIButton()
+    return button
+  }()
+  
+  lazy var collectionView: UICollectionView = {
+    let cv = UICollectionView()
+    return cv
+  }()
 
+  
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+      setUpViews()
+      setConstraints()
+  }
     
+  private func setUpViews() {
+    view.addSubview(addButotn)
+    view.addSubview(collectionView)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+  }
+  
+  private func setConstraints() {
+    addButotnConstraints()
+    collectionViewConstraints()
+  }
+  
+  private func addButotnConstraints() {
+    addButotn.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      addButotn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      addButotn.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      addButotn.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      addButotn.heightAnchor.constraint(equalToConstant: 50)
+    ])
+  }
+  
+  private func collectionViewConstraints() {
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      collectionView.topAnchor.constraint(equalTo: navBar.bottomAnchor),
+      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+    ])
+  }
+  
+  
 
 }

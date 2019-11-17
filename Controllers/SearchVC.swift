@@ -30,7 +30,7 @@ class SearchVC: UIViewController {
   
   lazy var menuButton: UIButton = {
     let button = UIButton()
-    view.backgroundColor = .white
+    button.backgroundColor = .red
     return button
   }()
   

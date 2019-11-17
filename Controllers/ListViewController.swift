@@ -9,22 +9,69 @@
 import UIKit
 
 class ListViewController: UIViewController {
-
+  
+ //MARK: VIEWS
+    lazy var navBar: UINavigationBar = {
+        let navBar = UINavigationBar()
+        return navBar
+      }()
+  
+  lazy var tableView: UITableView = {
+      let tv = UITableView()
+      return tv
+    }()
+    
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
+      super.viewDidLoad()
+      view.backgroundColor = .blue
+      setUpViews()
+      setConstraints()
+    }
 
-        // Do any additional setup after loading the view.
+  
+  //MARK: VIEW CONSTRAINTS
+
+    private func setUpViews() {
+      view.addSubview(navBar)
+      view.addSubview(tableView)
+
+      
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setConstraints() {
+      navBarConstraints()
+      tableViewConstraints()
     }
-    */
+    
+    private func navBarConstraints() {
+      navBar.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+        navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        navBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        navBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        navBar.heightAnchor.constraint(equalToConstant: 50)
+      ])
+    }
+    
+    private func tableViewConstraints() {
+      tableView.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+        tableView.topAnchor.constraint(equalTo: navBar.bottomAnchor),
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+      ])
+    }
+    
+    
+    
+    
 
-}
+    
+    
+    
+    
+    
+  }
+
