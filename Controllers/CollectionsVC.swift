@@ -10,9 +10,14 @@ import UIKit
 
 class CollectionsVC: UIViewController {
   
-  lazy var addButotn: UIButton = {
+  lazy var addButton: UIButton = {
     let button = UIButton()
     return button
+  }()
+  
+  lazy var myCollectionsLabel: UILabel = {
+    let label = UILabel()
+    return label
   }()
   
   lazy var collectionView: UICollectionView = {
@@ -29,31 +34,43 @@ class CollectionsVC: UIViewController {
   }
     
   private func setUpViews() {
-    view.addSubview(addButotn)
+    view.addSubview(addButton)
+    view.addSubview(myCollectionsLabel)
     view.addSubview(collectionView)
 
     
   }
   
   private func setConstraints() {
+    myCollectionsLabelConstraints()
     addButotnConstraints()
     collectionViewConstraints()
   }
   
-  private func addButotnConstraints() {
-    addButotn.translatesAutoresizingMaskIntoConstraints = false
+  private func myCollectionsLabelConstraints() {
+    myCollectionsLabel.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      addButotn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      addButotn.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      addButotn.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      addButotn.heightAnchor.constraint(equalToConstant: 50)
+      myCollectionsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+      myCollectionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      myCollectionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      myCollectionsLabel.heightAnchor.constraint(equalToConstant: 50)
+    ])
+  }
+  
+  private func addButotnConstraints() {
+    addButton.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      addButton.widthAnchor.constraint(equalToConstant: 50),
+      addButton.heightAnchor.constraint(equalToConstant: 50)
     ])
   }
   
   private func collectionViewConstraints() {
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: navBar.bottomAnchor),
+      collectionView.topAnchor.constraint(equalTo: myCollectionsLabel.bottomAnchor),
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
