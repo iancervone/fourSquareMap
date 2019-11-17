@@ -16,9 +16,12 @@ class CollectionsVC: UIViewController {
   
   lazy var collectionView: UICollectionView = {
     let cv = UICollectionView()
+    cv.delegate = self as! UICollectionViewDelegate
+    cv.dataSource = self as! UICollectionViewDataSource
+    cv.register(CollectionsVCCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
+    cv.backgroundColor = .clear
     return cv
   }()
-
   
   
     override func viewDidLoad() {

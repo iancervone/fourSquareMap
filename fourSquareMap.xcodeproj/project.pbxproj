@@ -22,6 +22,7 @@
 		3CB69E8B2381D4100007FB4E /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E8A2381D4100007FB4E /* ImageHelper.swift */; };
 		3CB69E8D2381D4550007FB4E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E8C2381D4550007FB4E /* NetworkManager.swift */; };
 		3CB69E8F2381D4F20007FB4E /* VenueAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E8E2381D4F20007FB4E /* VenueAPIClient.swift */; };
+		3CB69E932381E7F70007FB4E /* CollectionsVCCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E922381E7F70007FB4E /* CollectionsVCCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		3CB69E8A2381D4100007FB4E /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		3CB69E8C2381D4550007FB4E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3CB69E8E2381D4F20007FB4E /* VenueAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueAPIClient.swift; sourceTree = "<group>"; };
+		3CB69E922381E7F70007FB4E /* CollectionsVCCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsVCCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				3CB69E842381C2FD0007FB4E /* ListTVCell.swift */,
+				3CB69E922381E7F70007FB4E /* CollectionsVCCollectionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB69E932381E7F70007FB4E /* CollectionsVCCollectionCell.swift in Sources */,
 				3C096A6B2378D47800E5368F /* CollectionsVC.swift in Sources */,
 				3C1EA1882378E94E003F1DCF /* ListViewController.swift in Sources */,
 				3CB69E8D2381D4550007FB4E /* NetworkManager.swift in Sources */,

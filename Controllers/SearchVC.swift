@@ -14,6 +14,12 @@ class SearchVC: UIViewController {
   
   var venues: [Venue] = []
   
+  var searchString: String? = nil {
+     didSet{
+       map.addAnnotations(venues.filter{ $0.hasValidCoordinates })
+     }
+   }
+  
   private let locationManager = CLLocationManager()
   let initialLocation = CLLocation(latitude: 40.742054, longitude: -73.769417)
   let searchRadius: CLLocationDistance = 25
@@ -43,6 +49,11 @@ class SearchVC: UIViewController {
   
   lazy var venueCollectionView: UICollectionView = {
     let cv = UICollectionView()
+    cv.delegate = self as! UICollectionViewDelegate
+    cv.dataSource = self as! UICollectionViewDataSource
+    cv.register(CollectionsVCCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
+    cv.backgroundColor = .clear
+    return cv
     return cv
   }()
   
@@ -53,13 +64,36 @@ class SearchVC: UIViewController {
     view.backgroundColor = .blue
     setUpViews()
     setConstraints()
+    locationManager.delegate = self
+    map.delegate = self
+    locationSearch.delegate = self
+    map.userTrackingMode = .follow
+    locationAuthorization()
   }
   
+//  func loadData() {
+//    venues = VenueAPIClient.getVenues(VenueAPIClient.self.)
+//  }
   
-  private func centerLocation(location: CLLocationCoordinate2D, zoomLevel: Double) {
-      let coordinateRegion = MKCoordinateRegion(center: location, latitudinalMeters: searchRadius * zoomLevel, longitudinalMeters: searchRadius * zoomLevel)
-      map.setRegion(coordinateRegion, animated: true)
+  private func locationAuthorization() {
+    let status = CLLocationManager.authorizationStatus()
+    switch status {
+    case .authorizedAlways, .authorizedWhenInUse:
+      map.showsUserLocation = true
+      locationManager.requestLocation()
+      locationManager.startUpdatingLocation()
+      locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    default:
+      locationManager.requestWhenInUseAuthorization()
     }
+  }
+
+  
+  
+//  private func centerLocation(location: CLLocationCoordinate2D, zoomLevel: Double) {
+//      let coordinateRegion = MKCoordinateRegion(center: location, latitudinalMeters: searchRadius * zoomLevel, longitudinalMeters: searchRadius * zoomLevel)
+//      map.setRegion(coordinateRegion, animated: true)
+//    }
      
 
   private func setUpViews() {
@@ -131,19 +165,18 @@ class SearchVC: UIViewController {
   }
 
   
- // MARK: DATA FUNCTIONS
+
   
-  private func locationAuthorization() {
-    let status = CLLocationManager.authorizationStatus()
-    switch status {
-    case .authorizedAlways, .authorizedWhenInUse:
-      map.showsUserLocation = true
-      locationManager.requestLocation()
-      locationManager.startUpdatingLocation()
-      locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    default:
-      locationManager.requestWhenInUseAuthorization()
-    }
+  
+}
+
+extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return venues.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    <#code#>
   }
   
   
@@ -151,39 +184,78 @@ class SearchVC: UIViewController {
 
 
 
+
+//MARK: EXTENSIONS
+
+
+extension SearchVC: CLLocationManagerDelegate {
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    print("new location \(locations)")
+  }
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    print("authorization status change to \(status.rawValue)")
+    
+    switch status {
+    case .authorizedAlways, .authorizedWhenInUse:
+      locationManager.requestLocation()
+    default:
+      break
+    }
+
+  }
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    print(error)
+  }
+}
+
+
+extension SearchVC: MKMapViewDelegate {
+  
+}
+
+
 extension SearchVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+      searchString = searchText
+    }
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(true, animated: true)
         return true
     }
-    
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(false, animated: true)
         return true
     }
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
     }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        
-        if let userLocation = locationManager.location {
-            centerLocation(location: userLocation.coordinate, zoomLevel: 5)
-        }
-        
-        DispatchQueue.main.async {
-            VenueAPIClient.manager.getVenues(lat: (self.locationManager.location?.coordinate.latitude)!, long: (self.locationManager.location?.coordinate.longitude)!, query: searchBar.text!) { (result) in
-                switch result {
-                case .success(let success):
-                    self.venues = success
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
+       
+       searchBar.resignFirstResponder()
+       
+       let searchRequest = MKLocalSearch.Request()
+       searchRequest.naturalLanguageQuery = searchBar.text
+       let activeSearch = MKLocalSearch(request: searchRequest)
+       activeSearch.start { (response, error) in
+         
+         if response == nil {
+           print(error)
+         } else {
+           let annotaions = self.map.annotations
+           self.map.removeAnnotations(annotaions)
+           
+           let latitude = response?.boundingRegion.center.latitude
+           let longitude = response?.boundingRegion.center.longitude
+           
+           let newAnnotation = MKPointAnnotation()
+           newAnnotation.title = searchBar.text
+           newAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+           self.map.addAnnotation(newAnnotation)
+           
+           let coordinateRegion = MKCoordinateRegion.init(center: newAnnotation.coordinate, latitudinalMeters: self.searchRadius * 2.0, longitudinalMeters: self.searchRadius * 2.0)
+           self.map.setRegion(coordinateRegion, animated: true)
+         }
+       }
+     }
 }
