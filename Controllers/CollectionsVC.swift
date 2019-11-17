@@ -1,10 +1,4 @@
-//
-//  CollectionsViewController.swift
-//  fourSquareMap
-//
-//  Created by Ian Cervone on 11/10/19.
-//  Copyright © 2019 Ian Cervone. All rights reserved.
-//
+
 
 import UIKit
 
@@ -42,22 +36,12 @@ class CollectionsVC: UIViewController {
   }
   
   private func setConstraints() {
+    addButtonConstraints()
     myCollectionsLabelConstraints()
-    addButotnConstraints()
     collectionViewConstraints()
   }
   
-  private func myCollectionsLabelConstraints() {
-    myCollectionsLabel.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      myCollectionsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-      myCollectionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      myCollectionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      myCollectionsLabel.heightAnchor.constraint(equalToConstant: 50)
-    ])
-  }
-  
-  private func addButotnConstraints() {
+  private func addButtonConstraints() {
     addButton.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -66,6 +50,18 @@ class CollectionsVC: UIViewController {
       addButton.heightAnchor.constraint(equalToConstant: 50)
     ])
   }
+  
+  
+  private func myCollectionsLabelConstraints() {
+    myCollectionsLabel.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      myCollectionsLabel.topAnchor.constraint(equalTo: addButton.bottomAnchor),
+      myCollectionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      myCollectionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      myCollectionsLabel.heightAnchor.constraint(equalToConstant: 50)
+    ])
+  }
+
   
   private func collectionViewConstraints() {
     collectionView.translatesAutoresizingMaskIntoConstraints = false

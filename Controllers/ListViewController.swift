@@ -35,8 +35,6 @@ class ListViewController: UIViewController {
     private func setUpViews() {
       view.addSubview(navBar)
       view.addSubview(tableView)
-
-      
     }
     
     private func setConstraints() {

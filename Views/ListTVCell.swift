@@ -29,11 +29,11 @@ class ListTVCell: UITableViewCell {
         return label
       }()
       
-      override init(frame: CGRect) {
-        super.init(frame: .zero)
-        setUpCellSubviews()
-        setUpCellConstraints()
-      }
+//      override init(frame: CGRect) {
+//        super.init(frame: .zero)
+//        setUpCellSubviews()
+//        setUpCellConstraints()
+//      }
       
       required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

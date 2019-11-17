@@ -1,15 +1,15 @@
 
 import Foundation
 
-struct LocationResultsWrapper: Codable {
-    let response: ResponseWrapper?
+struct LocationResults: Codable {
+    let response: Response?
 }
 
-struct ResponseWrapper: Codable {
-    let groups: [GroupsWrapper]?
+struct Response: Codable {
+    let groups: [Groups]?
 }
 
-struct GroupsWrapper: Codable {
+struct Groups: Codable {
     let items: [Venue]?
 }
 
@@ -20,21 +20,21 @@ struct Venue: Codable {
 struct VenueDetails: Codable {
     let id: String?
     let name: String?
-    let location: LocationWrapper?
+    let location: Location?
     let distance: Double?
     let neighborhood: String?
     let city: String?
     let state: String?
     let formattedAddress: String?
-    let categories: [CategoriesWrapper]?
+    let categories: [Categories]?
 }
 
-struct LocationWrapper: Codable {
+struct Location: Codable {
     let lat: Double?
     let lng: Double?
 }
 
-struct CategoriesWrapper: Codable {
+struct Categories: Codable {
     let id: String?
     let name: String?
     let shortName: String?

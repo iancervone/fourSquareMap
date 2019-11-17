@@ -19,6 +19,9 @@
 		3CB69E852381C2FD0007FB4E /* ListTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E842381C2FD0007FB4E /* ListTVCell.swift */; };
 		3CB69E872381D33C0007FB4E /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E862381D33C0007FB4E /* LocationModel.swift */; };
 		3CB69E892381D3AC0007FB4E /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E882381D3AC0007FB4E /* AppError.swift */; };
+		3CB69E8B2381D4100007FB4E /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E8A2381D4100007FB4E /* ImageHelper.swift */; };
+		3CB69E8D2381D4550007FB4E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E8C2381D4550007FB4E /* NetworkManager.swift */; };
+		3CB69E8F2381D4F20007FB4E /* VenueAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E8E2381D4F20007FB4E /* VenueAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		3CB69E842381C2FD0007FB4E /* ListTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTVCell.swift; sourceTree = "<group>"; };
 		3CB69E862381D33C0007FB4E /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		3CB69E882381D3AC0007FB4E /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		3CB69E8A2381D4100007FB4E /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		3CB69E8C2381D4550007FB4E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3CB69E8E2381D4F20007FB4E /* VenueAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +79,8 @@
 			children = (
 				3C13E43E2370D5CE00301711 /* Models */,
 				3C13E43F2370D5E000301711 /* Controllers */,
-				3C13E4412370D60A00301711 /* Helpers */,
 				3C13E4402370D5FD00301711 /* Views */,
+				3C13E4412370D60A00301711 /* Helpers */,
 				3C13E41B2370D53400301711 /* fourSquareMap */,
 				3C13E4322370D53500301711 /* fourSquareMapTests */,
 				3C13E41A2370D53400301711 /* Products */,
@@ -142,6 +148,9 @@
 			isa = PBXGroup;
 			children = (
 				3CB69E882381D3AC0007FB4E /* AppError.swift */,
+				3CB69E8A2381D4100007FB4E /* ImageHelper.swift */,
+				3CB69E8C2381D4550007FB4E /* NetworkManager.swift */,
+				3CB69E8E2381D4F20007FB4E /* VenueAPIClient.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -249,9 +258,12 @@
 			files = (
 				3C096A6B2378D47800E5368F /* CollectionsVC.swift in Sources */,
 				3C1EA1882378E94E003F1DCF /* ListViewController.swift in Sources */,
+				3CB69E8D2381D4550007FB4E /* NetworkManager.swift in Sources */,
+				3CB69E8B2381D4100007FB4E /* ImageHelper.swift in Sources */,
 				3C13E4212370D53400301711 /* SearchVC.swift in Sources */,
 				3C13E41D2370D53400301711 /* AppDelegate.swift in Sources */,
 				3CB69E892381D3AC0007FB4E /* AppError.swift in Sources */,
+				3CB69E8F2381D4F20007FB4E /* VenueAPIClient.swift in Sources */,
 				3C13E41F2370D53400301711 /* SceneDelegate.swift in Sources */,
 				3CB69E872381D33C0007FB4E /* LocationModel.swift in Sources */,
 				3CB69E852381C2FD0007FB4E /* ListTVCell.swift in Sources */,
