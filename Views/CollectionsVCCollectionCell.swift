@@ -4,7 +4,7 @@ import UIKit
 
 class CollectionsVCCollectionCell: UITableViewCell {
 
-   lazy var venuImage: UIImageView = {
+   lazy var venueImage: UIImageView = {
         let image = UIImageView()
         return image
       }()
@@ -34,7 +34,7 @@ class CollectionsVCCollectionCell: UITableViewCell {
       }
       
       private func setUpCellSubviews() {
-        contentView.addSubview(venuImage)
+        contentView.addSubview(venueImage)
 //        contentView.addSubview(venueNameLabel)
 //        contentView.addSubview(categoryLabel)
       }
@@ -44,18 +44,18 @@ class CollectionsVCCollectionCell: UITableViewCell {
       // MARK: - CONSTRAINTS
 
       private func setUpCellConstraints () {
-        venuImageConstraints()
+        venueImageConstraints()
 //        venueNameLabelConstraints()
 //        categoryLabelConstraints()
       }
       
-      private func venuImageConstraints() {
-        venuImage.translatesAutoresizingMaskIntoConstraints = false
+      private func venueImageConstraints() {
+        venueImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-          venuImage.topAnchor.constraint(equalTo: self.topAnchor) ,
-          venuImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-          venuImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-          venuImage.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+          venueImage.topAnchor.constraint(equalTo: self.topAnchor) ,
+          venueImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+          venueImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+          venueImage.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
       }
       

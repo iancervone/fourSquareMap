@@ -12,11 +12,21 @@ import CoreLocation
 
 class SearchVC: UIViewController {
   
-  var venues: [Venue] = []
+  var venues = [Venue]() {
+      didSet {
+          venueCollectionView.reloadData()
+      }
+  }
+  
+  var images = [Image]() {
+         didSet {
+             venueCollectionView.reloadData()
+         }
+     }
   
   var searchString: String? = nil {
      didSet{
-       map.addAnnotations(venues.filter{ $0.hasValidCoordinates })
+//       map.addAnnotations(venues.filter{ $0.hasValidCoordinates })
      }
    }
   
@@ -48,9 +58,11 @@ class SearchVC: UIViewController {
   }()
   
   lazy var venueCollectionView: UICollectionView = {
-    let cv = UICollectionView()
-    cv.delegate = self as! UICollectionViewDelegate
-    cv.dataSource = self as! UICollectionViewDataSource
+    let layout = UICollectionViewFlowLayout()
+    let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    layout.scrollDirection = .horizontal
+//    cv.delegate = self as! UICollectionViewDelegate
+//    cv.dataSource = self as! UICollectionViewDataSource
     cv.register(CollectionsVCCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
     cv.backgroundColor = .clear
     return cv
@@ -67,6 +79,7 @@ class SearchVC: UIViewController {
     locationManager.delegate = self
     map.delegate = self
     locationSearch.delegate = self
+    
     map.userTrackingMode = .follow
     locationAuthorization()
   }
@@ -170,22 +183,77 @@ class SearchVC: UIViewController {
   
 }
 
-extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return venues.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    <#code#>
-  }
-  
-  
-}
+//extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+//  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//    return venues.count
+//  }
+//
+//  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//    <#code#>
+//  }
+//
+//
+//}
 
 
 
 
 //MARK: EXTENSIONS
+
+extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return venues.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionsVCCollectionCell
+        
+        let spot = venues[indexPath.row]
+
+//        cell.weeksOnLabel.text = "\(book.weeksOnList ?? 0) weeks as best seller"
+//        cell.descriptionLabel.text = book.bookInfo?[0].bookDetailDescription
+        
+        if images.count > 0, let imageURL = self.images[indexPath.row].bookImage {
+        ImageHelper.shared.getImage(urlStr: imageURL) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success (let image):
+                    cell.bestSellerImage.image = image
+                case .failure(let error):
+                    print(error)
+                }
+            }
+          }
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 200, height: 300)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("cell pressed")
+        let dvc = DetailVC()
+        dvc.modalPresentationStyle = .currentContext
+        let selectedBook = bestsellers[indexPath.row]
+        let selectedImage = images[indexPath.row]
+        dvc.bestSeller = selectedBook
+        dvc.bestSellerImage = selectedImage
+        self.present(dvc, animated: true, completion: nil)
+        
+    }
+    
+}
+
+
+
+
+
+
 
 
 extension SearchVC: CLLocationManagerDelegate {
