@@ -17,6 +17,7 @@
 		3C13E4342370D53500301711 /* fourSquareMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13E4332370D53500301711 /* fourSquareMapTests.swift */; };
 		3C1EA1882378E94E003F1DCF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1EA1872378E94E003F1DCF /* ListViewController.swift */; };
 		3CB26ED3238327C700F63B45 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB26ED2238327C700F63B45 /* Image.swift */; };
+		3CB26ED52383373000F63B45 /* ImageAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB26ED42383373000F63B45 /* ImageAPIClient.swift */; };
 		3CB69E852381C2FD0007FB4E /* ListTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E842381C2FD0007FB4E /* ListTVCell.swift */; };
 		3CB69E872381D33C0007FB4E /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E862381D33C0007FB4E /* LocationModel.swift */; };
 		3CB69E892381D3AC0007FB4E /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB69E882381D3AC0007FB4E /* AppError.swift */; };
@@ -51,6 +52,7 @@
 		3C13E4352370D53500301711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C1EA1872378E94E003F1DCF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3CB26ED2238327C700F63B45 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		3CB26ED42383373000F63B45 /* ImageAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPIClient.swift; sourceTree = "<group>"; };
 		3CB69E842381C2FD0007FB4E /* ListTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTVCell.swift; sourceTree = "<group>"; };
 		3CB69E862381D33C0007FB4E /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		3CB69E882381D3AC0007FB4E /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				3CB69E8A2381D4100007FB4E /* ImageHelper.swift */,
 				3CB69E8C2381D4550007FB4E /* NetworkManager.swift */,
 				3CB69E8E2381D4F20007FB4E /* VenueAPIClient.swift */,
+				3CB26ED42383373000F63B45 /* ImageAPIClient.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				3CB69E932381E7F70007FB4E /* CollectionsVCCollectionCell.swift in Sources */,
 				3C096A6B2378D47800E5368F /* CollectionsVC.swift in Sources */,
 				3C1EA1882378E94E003F1DCF /* ListViewController.swift in Sources */,
+				3CB26ED52383373000F63B45 /* ImageAPIClient.swift in Sources */,
 				3CB69E8D2381D4550007FB4E /* NetworkManager.swift in Sources */,
 				3CB69E8B2381D4100007FB4E /* ImageHelper.swift in Sources */,
 				3C13E4212370D53400301711 /* SearchVC.swift in Sources */,

@@ -1,18 +1,25 @@
 
 import Foundation
-
 import UIKit
 
 class ImageHelper {
+    private init() {}
     
-    
+    // MARK: - Static Properties
     static let shared = ImageHelper()
     
-  
-    func getImage(url: URL, completionHandler: @escaping (Result<UIImage, AppError>) -> ()) {
+    // MARK: - Internal Methods
+    func getImage(urlStr: String, completionHandler: @escaping (Result<UIImage,AppError>) -> ()) {
+        
+        guard let url = URL(string: urlStr) else {
+            completionHandler(.failure(.badURL))
+            return
+        }
+        
         URLSession.shared.dataTask(with: url) { (data, _, error) in
+            
             guard error == nil else {
-                completionHandler(.failure(.badURL))
+                completionHandler(.failure(.noDataReceived))
                 return
             }
             
@@ -27,8 +34,9 @@ class ImageHelper {
             }
             
             completionHandler(.success(image))
-            }.resume()
-    }
+            
+            } .resume()
         
-    private init() {}
+    }
+    
 }

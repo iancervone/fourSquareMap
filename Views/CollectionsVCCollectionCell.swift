@@ -2,7 +2,7 @@
 
 import UIKit
 
-class CollectionsVCCollectionCell: UITableViewCell {
+class CollectionsVCCollectionCell: UICollectionViewCell {
 
    lazy var venueImage: UIImageView = {
         let image = UIImageView()

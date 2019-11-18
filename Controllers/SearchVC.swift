@@ -18,7 +18,7 @@ class SearchVC: UIViewController {
       }
   }
   
-  var images = [Image]() {
+  var images = [VenuePhoto]() {
          didSet {
              venueCollectionView.reloadData()
          }
@@ -79,7 +79,8 @@ class SearchVC: UIViewController {
     locationManager.delegate = self
     map.delegate = self
     locationSearch.delegate = self
-    
+    venueCollectionView.delegate = self
+    venueCollectionView.dataSource = self
     map.userTrackingMode = .follow
     locationAuthorization()
   }
@@ -215,15 +216,15 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 //        cell.weeksOnLabel.text = "\(book.weeksOnList ?? 0) weeks as best seller"
 //        cell.descriptionLabel.text = book.bookInfo?[0].bookDetailDescription
         
-        if images.count > 0, let imageURL = self.images[indexPath.row].bookImage {
+      if images.count > 0, let imageURL = self.images[indexPath.row].prefix {
         ImageHelper.shared.getImage(urlStr: imageURL) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success (let image):
-                    cell.bestSellerImage.image = image
+                    cell.venueImage.image = image
                 case .failure(let error):
                     print(error)
-                }
+              }
             }
           }
         }
@@ -235,17 +236,17 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return CGSize(width: 200, height: 300)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("cell pressed")
-        let dvc = DetailVC()
-        dvc.modalPresentationStyle = .currentContext
-        let selectedBook = bestsellers[indexPath.row]
-        let selectedImage = images[indexPath.row]
-        dvc.bestSeller = selectedBook
-        dvc.bestSellerImage = selectedImage
-        self.present(dvc, animated: true, completion: nil)
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        print("cell pressed")
+//        let dvc = DetailVC()
+//        dvc.modalPresentationStyle = .currentContext
+//        let selectedBook = bestsellers[indexPath.row]
+//        let selectedImage = images[indexPath.row]
+//        dvc.bestSeller = selectedBook
+//        dvc.bestSellerImage = selectedImage
+//        self.present(dvc, animated: true, completion: nil)
+//
+//    }
     
 }
 
