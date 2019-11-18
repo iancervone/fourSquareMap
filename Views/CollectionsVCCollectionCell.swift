@@ -6,6 +6,7 @@ class CollectionsVCCollectionCell: UICollectionViewCell {
 
    lazy var venueImage: UIImageView = {
         let image = UIImageView()
+    image.backgroundColor = .green
         return image
       }()
       

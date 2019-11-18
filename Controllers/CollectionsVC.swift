@@ -1,11 +1,15 @@
 
 
 import UIKit
+import MapKit
+import CoreLocation
+import Foundation
 
 class CollectionsVC: UIViewController {
   
   lazy var addButton: UIButton = {
     let button = UIButton()
+    button.setImage(UIImage(systemName: "plus"), for: .normal)
     return button
   }()
   
@@ -16,8 +20,6 @@ class CollectionsVC: UIViewController {
   
   lazy var collectionView: UICollectionView = {
     let cv = UICollectionView()
-    cv.delegate = self as! UICollectionViewDelegate
-    cv.dataSource = self as! UICollectionViewDataSource
     cv.register(CollectionsVCCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
     cv.backgroundColor = .clear
     return cv
@@ -34,8 +36,6 @@ class CollectionsVC: UIViewController {
     view.addSubview(addButton)
     view.addSubview(myCollectionsLabel)
     view.addSubview(collectionView)
-
-    
   }
   
   private func setConstraints() {

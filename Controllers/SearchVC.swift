@@ -38,15 +38,17 @@ class SearchVC: UIViewController {
   //MARK: VIEWS
   lazy var venueSearch: UISearchBar = {
     let searchbar = UISearchBar()
+    searchbar.text = "enter a type of food"
     return searchbar
   }()
   
   lazy var locationSearch: UISearchBar = {
     let searchbar = UISearchBar()
+    searchbar.text = "enter name of a city"
     return searchbar
   }()
   
-  lazy var menuButton: UIButton = {
+  lazy var listButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(systemName: "text.justify"), for: .normal)
 //    button.backgroundColor = .red
@@ -65,7 +67,7 @@ class SearchVC: UIViewController {
 //    cv.delegate = self as! UICollectionViewDelegate
 //    cv.dataSource = self as! UICollectionViewDataSource
     cv.register(CollectionsVCCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
-    cv.backgroundColor = .clear
+    cv.backgroundColor = .red
     return cv
     return cv
   }()
@@ -80,15 +82,16 @@ class SearchVC: UIViewController {
     locationManager.delegate = self
     map.delegate = self
     locationSearch.delegate = self
+    venueSearch.delegate = self
     venueCollectionView.delegate = self
     venueCollectionView.dataSource = self
     map.userTrackingMode = .follow
     locationAuthorization()
   }
   
-//  func loadData() {
-//    venues = VenueAPIClient.getVenues(VenueAPIClient.self.)
-//  }
+  func loadData() {
+//    venues = VenueAPIClient.getVenues(VenueAPIClient.self)
+  }
   
   private func locationAuthorization() {
     let status = CLLocationManager.authorizationStatus()
@@ -114,14 +117,14 @@ class SearchVC: UIViewController {
   private func setUpViews() {
     view.addSubview(venueSearch)
     view.addSubview(locationSearch)
-    view.addSubview(menuButton)
+    view.addSubview(listButton)
     view.addSubview(map)
     view.addSubview(venueCollectionView)
   }
   
   private func setConstraints() {
     venueSearchConstraints()
-    menuButtonConstraints()
+    listButtonConstraints()
     locationSearchConstraints()
     mapConstraints()
     venueCollectionViewConstraints()
@@ -132,18 +135,18 @@ class SearchVC: UIViewController {
     NSLayoutConstraint.activate([
       venueSearch.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       venueSearch.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      venueSearch.trailingAnchor.constraint(equalTo: menuButton.leadingAnchor),
+      venueSearch.trailingAnchor.constraint(equalTo: listButton.leadingAnchor),
       venueSearch.heightAnchor.constraint(equalToConstant: 50)
     ])
   }
   
-  private func menuButtonConstraints() {
-    menuButton.translatesAutoresizingMaskIntoConstraints = false
+  private func listButtonConstraints() {
+    listButton.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
-      menuButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      menuButton.widthAnchor.constraint(equalToConstant: 50),
-      menuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      menuButton.heightAnchor.constraint(equalToConstant: 50)
+      listButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      listButton.widthAnchor.constraint(equalToConstant: 50),
+      listButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      listButton.heightAnchor.constraint(equalToConstant: 50)
     ])
   }
   
@@ -173,7 +176,7 @@ class SearchVC: UIViewController {
     NSLayoutConstraint.activate([
       venueCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
       venueCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-      venueCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+      venueCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
       venueCollectionView.heightAnchor.constraint(equalToConstant: 120)
     ])
 
@@ -184,21 +187,6 @@ class SearchVC: UIViewController {
   
   
 }
-
-//extension SearchVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-//  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//    return venues.count
-//  }
-//
-//  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//    <#code#>
-//  }
-//
-//
-//}
-
-
-
 
 //MARK: EXTENSIONS
 
@@ -253,15 +241,11 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 
 
 
-
-
-
-
-
 extension SearchVC: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     print("new location \(locations)")
   }
+  
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     print("authorization status change to \(status.rawValue)")
     
@@ -271,8 +255,8 @@ extension SearchVC: CLLocationManagerDelegate {
     default:
       break
     }
-
   }
+  
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     print(error)
   }
@@ -280,7 +264,6 @@ extension SearchVC: CLLocationManagerDelegate {
 
 
 extension SearchVC: MKMapViewDelegate {
-  
 }
 
 
@@ -288,18 +271,26 @@ extension SearchVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
       searchString = searchText
     }
+  
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(true, animated: true)
         return true
     }
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    searchBar.text = ""
+  }
+  
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(false, animated: true)
         return true
     }
+  
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
     }
+  
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
        
        searchBar.resignFirstResponder()
@@ -323,7 +314,7 @@ extension SearchVC: UISearchBarDelegate {
            newAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
            self.map.addAnnotation(newAnnotation)
            
-           let coordinateRegion = MKCoordinateRegion.init(center: newAnnotation.coordinate, latitudinalMeters: self.searchRadius * 2.0, longitudinalMeters: self.searchRadius * 2.0)
+           let coordinateRegion = MKCoordinateRegion.init(center: newAnnotation.coordinate, latitudinalMeters: self.searchRadius * 500.0, longitudinalMeters: self.searchRadius * 500.0)
            self.map.setRegion(coordinateRegion, animated: true)
          }
        }
