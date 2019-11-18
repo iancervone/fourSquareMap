@@ -48,7 +48,8 @@ class SearchVC: UIViewController {
   
   lazy var menuButton: UIButton = {
     let button = UIButton()
-    button.backgroundColor = .red
+    button.setImage(UIImage(systemName: "text.justify"), for: .normal)
+//    button.backgroundColor = .red
     return button
   }()
   
@@ -73,7 +74,7 @@ class SearchVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .blue
+    view.backgroundColor = .white
     setUpViews()
     setConstraints()
     locationManager.delegate = self
