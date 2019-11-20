@@ -7,7 +7,7 @@ struct ImageAPIClient {
     
     func getImages(completionHandler: @escaping (Result<[VenuePhoto]?, AppError>) -> Void) {
         
-        let urlString = "https://api.foursquare.com/v2/venues/43695300f964a5208c291fe3/photos?client_id=BKR3JSFXQGW1AJJM3CHLHQOXKNPQF4YE1GSVXBU34QQ1F4D5&client_secret=0VU4B2IKQ2WKSKRWU2TJRH4BGNZUSBOEW2INWELCQNFJISFT&v=20120609"
+      let urlString = "https://api.foursquare.com/v2/venues/43695300f964a5208c291fe3/photos?client_id=\(FourSquareLogin.apiClientId)&client_secret=\(FourSquareLogin.apiClientSeceret)&v=20120609"
         
         print(urlString)
         guard let url = URL(string: urlString) else {
@@ -26,7 +26,8 @@ struct ImageAPIClient {
                 case let .success(data):
                     do {
                         let response = try VenuePhoto.getImages(from: data)
-                        completionHandler(.success(response))
+                      self.getImages { (result) in
+                      }
                     }
                     catch {
                         completionHandler(.failure(.couldNotParseJSON(rawError: error)))
