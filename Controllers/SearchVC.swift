@@ -26,6 +26,7 @@ class SearchVC: UIViewController {
   
   var searchString: String? = nil {
      didSet{
+      loadVenues()
 //       map.addAnnotations(venues.filter{ $0.hasValidCoordinates })
      }
    }
@@ -67,13 +68,13 @@ class SearchVC: UIViewController {
 //    cv.delegate = self as! UICollectionViewDelegate
 //    cv.dataSource = self as! UICollectionViewDataSource
     cv.register(CollectionsVCCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
-    cv.backgroundColor = .red
+    cv.backgroundColor = .cyan
     return cv
     return cv
   }()
   
   
-  
+  //MARK: LIFECYCLES
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
@@ -87,10 +88,22 @@ class SearchVC: UIViewController {
     venueCollectionView.dataSource = self
     map.userTrackingMode = .follow
     locationAuthorization()
+    loadVenues()
   }
   
-  func loadData() {
-//    venues = VenueAPIClient.getVenues(VenueAPIClient.self)
+  
+  
+  private func loadVenues() {
+    VenueAPIClient.manager.getVenues(near: searchString ?? "New York", query: "pizza") { (result) in
+          DispatchQueue.main.async {
+              switch result {
+              case .success(let success):
+                self.venues = success
+              case .failure(let error):
+                  print(error)
+              }
+          }
+      }
   }
   
   private func locationAuthorization() {
@@ -113,7 +126,7 @@ class SearchVC: UIViewController {
 //      map.setRegion(coordinateRegion, animated: true)
 //    }
      
-
+  //MARK: SETUP VIEWS / CONSTRAINTS
   private func setUpViews() {
     view.addSubview(venueSearch)
     view.addSubview(locationSearch)
@@ -179,7 +192,6 @@ class SearchVC: UIViewController {
       venueCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
       venueCollectionView.heightAnchor.constraint(equalToConstant: 120)
     ])
-
   }
 
   
@@ -200,23 +212,37 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionsVCCollectionCell
         
-        let spot = venues[indexPath.row]
+        let theVenue = venues[indexPath.row]
 
+      cell.venueImage.text = theVenue.venue?.name
 //        cell.weeksOnLabel.text = "\(book.weeksOnList ?? 0) weeks as best seller"
 //        cell.descriptionLabel.text = book.bookInfo?[0].bookDetailDescription
+     
+//          ImageAPIClient.manager.getImages { (result) in
+//                DispatchQueue.main.async {
+//                    switch result {
+//                    case .success(let pic):
+//                      self.images = pic!
+//                      cell.venueImage.image = pic
+//
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
+//            }
         
-      if images.count > 0, let imageURL = self.images[indexPath.row].prefix {
-        ImageHelper.shared.getImage(urlStr: imageURL) { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success (let image):
-                    cell.venueImage.image = image
-                case .failure(let error):
-                    print(error)
-              }
-            }
-          }
-        }
+//      if images.count > 0, let imageURL = "\(self.images[indexPath.row].prefix)\(self.images[indexPath.row].suffix)" {
+//        ImageHelper.shared.getImage(urlStr: imageURL) { (result) in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success (let image):
+//                    cell.venueImage.image = image
+//                case .failure(let error):
+//                    print(error)
+//              }
+//            }
+//          }
+//        }
         
         return cell
     }
@@ -270,6 +296,7 @@ extension SearchVC: MKMapViewDelegate {
 extension SearchVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
       searchString = searchText
+      print(searchString)
     }
   
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {

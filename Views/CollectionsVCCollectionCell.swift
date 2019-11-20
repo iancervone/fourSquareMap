@@ -4,9 +4,11 @@ import UIKit
 
 class CollectionsVCCollectionCell: UICollectionViewCell {
 
-   lazy var venueImage: UIImageView = {
-        let image = UIImageView()
-    image.backgroundColor = .green
+   lazy var venueImage: UILabel = {
+        let image = UILabel()
+        image.text = "hi"
+    image.font.withSize(40)
+        image.backgroundColor = .green
         return image
       }()
       
