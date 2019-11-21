@@ -7,7 +7,7 @@ class VenueAPIClient {
     
   func getVenues(near: String, query: String, completionHandler: @escaping (Result<[Venue], AppError>) -> () ){
 
-      let urlString = "https://api.foursquare.com/v2/venues/search?client_id=BKR3JSFXQGW1AJJM3CHLHQOXKNPQF4YE1GSVXBU34QQ1F4D5&client_secret=0VU4B2IKQ2WKSKRWU2TJRH4BGNZUSBOEW2INWELCQNFJISFT&v=20120609&limit=10&near=\(near),IL&query=tacos"
+    let urlString = "https://api.foursquare.com/v2/venues/search?client_id=\(FourSquareLogin.apiClientId)&client_secret=\(FourSquareLogin.apiClientSeceret)&v=20120609&limit=10&near=\(near),IL&query=\(query)"
         
         guard let url = URL(string: urlString)  else {
             completionHandler(.failure(.badURL))

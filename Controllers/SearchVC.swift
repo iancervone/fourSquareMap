@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  fourSquareMap
-//
-//  Created by Ian Cervone on 11/4/19.
-//  Copyright © 2019 Ian Cervone. All rights reserved.
-//
 
 import UIKit
 import MapKit
@@ -65,8 +58,6 @@ class SearchVC: UIViewController {
     let layout = UICollectionViewFlowLayout()
     let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
     layout.scrollDirection = .horizontal
-//    cv.delegate = self as! UICollectionViewDelegate
-//    cv.dataSource = self as! UICollectionViewDataSource
     cv.register(CollectionsVCCollectionCell.self, forCellWithReuseIdentifier: "collectionCell")
     cv.backgroundColor = .cyan
     return cv
@@ -80,15 +71,19 @@ class SearchVC: UIViewController {
     view.backgroundColor = .white
     setUpViews()
     setConstraints()
+    setDelegates()
+    map.userTrackingMode = .follow
+    locationAuthorization()
+    loadVenues()
+  }
+  
+  private func setDelegates() {
     locationManager.delegate = self
     map.delegate = self
     locationSearch.delegate = self
     venueSearch.delegate = self
     venueCollectionView.delegate = self
     venueCollectionView.dataSource = self
-    map.userTrackingMode = .follow
-    locationAuthorization()
-    loadVenues()
   }
   
   
@@ -120,11 +115,7 @@ class SearchVC: UIViewController {
   }
 
   
-  
-//  private func centerLocation(location: CLLocationCoordinate2D, zoomLevel: Double) {
-//      let coordinateRegion = MKCoordinateRegion(center: location, latitudinalMeters: searchRadius * zoomLevel, longitudinalMeters: searchRadius * zoomLevel)
-//      map.setRegion(coordinateRegion, animated: true)
-//    }
+
      
   //MARK: SETUP VIEWS / CONSTRAINTS
   private func setUpViews() {
@@ -212,11 +203,10 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionsVCCollectionCell
         
-        let theVenue = venues[indexPath.row]
+        let theVenuePic = images[indexPath.row]
 
-      cell.venueImage.text = theVenue.venue?.name
-//        cell.weeksOnLabel.text = "\(book.weeksOnList ?? 0) weeks as best seller"
-//        cell.descriptionLabel.text = book.bookInfo?[0].bookDetailDescription
+//      cell.venueImage.image = theVenuePic.prefix
+//
      
 //          ImageAPIClient.manager.getImages { (result) in
 //                DispatchQueue.main.async {
@@ -250,18 +240,6 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 200, height: 300)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print("cell pressed")
-//        let dvc = DetailVC()
-//        dvc.modalPresentationStyle = .currentContext
-//        let selectedBook = bestsellers[indexPath.row]
-//        let selectedImage = images[indexPath.row]
-//        dvc.bestSeller = selectedBook
-//        dvc.bestSellerImage = selectedImage
-//        self.present(dvc, animated: true, completion: nil)
-//
-//    }
     
 }
 
